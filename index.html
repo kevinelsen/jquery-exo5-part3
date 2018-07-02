@@ -12,27 +12,44 @@
       <div id="square"></div>
     </form>
     <script>
-    $(function(){
-      //largeur de la fenêtre
-      var widthWindow = $(window).width();
-      //hauteur de la fenêtre
-      var heightWindow = $(window).height();
-      //Losqu'on appuie sur une touche
-      $('#text').keydown(function(e){
-        //postion horizontal de la div
-        var positionSquareX = $('#square').offset().left;
-        //positon vertical de la div
-        var positionSquareY = $('#square').offset().top;
-        switch (e.keyCode) { //e.keyCode = valeur d'une touche de clavier
-          case 39://touche droite
-          case 68://touche d
-          //Si la positon horizontal et plus grand ou égale a la largeur de l'écran
-          if(positionSquareX >= (widthWindow-105)){
-            //Le carrer a un margin a 0
-            $('#square').css('margin-left', '0');
-          }else {
-            // Sinon le carre gagne 10px en margin left
-            $('#square').css('margin-left', '+=10px');
-          }
-  </body>
+    $('#text').keydown(function(e) {
+      var windowHeight = $(window).height();
+      var windowWidth = $(window).width();
+      var marginLeft = parseInt($('#square').css('margin-left'));
+      var marginTop = parseInt($('#square').css('margin-top'));
+      switch (e.which) {
+        case 37:
+        marginLeft -= 10;
+        if(marginLeft <= 0) {
+          marginLeft = windowWidth - 50;
+        }
+        $('#square').css('margin-left', marginLeft);
+        break;
+        case 38:
+        marginTop -= 10;
+        if(marginTop <= 0) {
+          marginTop = windowHeight - 90;
+        }
+        $('#square').css('margin-top', marginTop);
+        break;
+        case 39:
+        marginLeft += 10;
+        if (windowWidth <= marginLeft + 50) {
+          marginLeft = 0;
+        }
+        $('#square').css('margin-left', marginLeft);
+        break;
+        case 40:
+        marginTop += 10;
+        if (windowHeight <= marginTop + 90) {
+          marginTop = 0;
+        }
+        $('#square').css('margin-top', marginTop);
+        break;
+      }
+    });
+
+
+ </script>
+   </body>
 </html>
